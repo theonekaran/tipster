@@ -14,10 +14,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var billText: UITextField!
+    @IBOutlet weak var view1: UIView!
+    @IBOutlet weak var view2: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        [billText.becomeFirstResponder()]
+        self.view2.alpha = 0
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +36,10 @@ class ViewController: UIViewController {
 
     @IBAction func calculateTip(sender: AnyObject) {
         
+        UIView.animateWithDuration(0.4, animations: {
+            self.view2.alpha = 1
+        })
+        
         let tipPercentages = [0.15, 0.18, 0.20]
         
         let bill = Double(billText.text!) ?? 0
@@ -39,6 +48,12 @@ class ViewController: UIViewController {
         
         tipLabel.text = String(format: "$%.2f", tip)
         totalLabel.text = String(format: "$%.2f", total)
+        
+        if (bill == 0) {
+            UIView.animateWithDuration(0.2, animations: {
+                self.view2.alpha = 0
+            })
+        }
     }
 }
 
