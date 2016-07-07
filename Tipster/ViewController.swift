@@ -17,10 +17,43 @@ class ViewController: UIViewController {
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var view2: UIView!
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        print("view will appear")
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let intValue = defaults.integerForKey("defaultValue")
+        tipSegment.selectedSegmentIndex = intValue
+        
+        if billText.text != "0" {
+            let tipPercentages = [0.15, 0.18, 0.20]
+            
+            let bill = Double(billText.text!) ?? 0
+            let tip = bill * tipPercentages[tipSegment.selectedSegmentIndex]
+            let total = bill + tip
+            
+            if (bill == 0) {
+                UIView.animateWithDuration(0.2, animations: {
+                    self.view2.alpha = 0
+                })
+            } else {
+                tipLabel.text = String(format: "$%.2f", tip)
+                totalLabel.text = String(format: "$%.2f", total)
+                
+                UIView.animateWithDuration(0.4, animations: {
+                    self.view2.alpha = 1
+                })
+                
+            }
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         [billText.becomeFirstResponder()]
+        
         self.view2.alpha = 0
         
     }
@@ -36,9 +69,6 @@ class ViewController: UIViewController {
 
     @IBAction func calculateTip(sender: AnyObject) {
         
-        UIView.animateWithDuration(0.4, animations: {
-            self.view2.alpha = 1
-        })
         
         let tipPercentages = [0.15, 0.18, 0.20]
         
@@ -46,14 +76,20 @@ class ViewController: UIViewController {
         let tip = bill * tipPercentages[tipSegment.selectedSegmentIndex]
         let total = bill + tip
         
-        tipLabel.text = String(format: "$%.2f", tip)
-        totalLabel.text = String(format: "$%.2f", total)
-        
         if (bill == 0) {
             UIView.animateWithDuration(0.2, animations: {
                 self.view2.alpha = 0
             })
+        } else {
+            tipLabel.text = String(format: "$%.2f", tip)
+            totalLabel.text = String(format: "$%.2f", total)
+            
+            UIView.animateWithDuration(0.4, animations: {
+                self.view2.alpha = 1
+            })
+            
         }
+        
     }
 }
 

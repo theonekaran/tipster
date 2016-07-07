@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="0qh-Ve-dqj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="0qh-Ve-dqj">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -85,7 +85,13 @@
                             <outletCollection property="gestureRecognizers" destination="BOk-bv-GM4" appends="YES" id="isV-Pn-4Uz"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="Tipster" id="iUg-pL-n5s"/>
+                    <navigationItem key="navigationItem" title="Tipster" id="iUg-pL-n5s">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="5R1-gv-JEG">
+                            <connections>
+                                <segue destination="lCW-4g-ml0" kind="push" id="PUD-l4-uFU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="billText" destination="uJs-SH-a1H" id="68z-9O-b2Y"/>
                         <outlet property="tipLabel" destination="cmq-oi-4vl" id="FbU-uB-fsg"/>
@@ -102,7 +108,40 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="763" y="239"/>
+            <point key="canvasLocation" x="760" y="406"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="WS6-Az-AWu">
+            <objects>
+                <viewController id="lCW-4g-ml0" customClass="SettingsViewController" customModule="Tipster" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aPu-2Q-9L6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="eEY-77-COW">
+                                <rect key="frame" x="20" y="117" width="280" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="15%"/>
+                                    <segment title="18%"/>
+                                    <segment title="20%"/>
+                                </segments>
+                                <color key="tintColor" red="0.1529411765" green="0.1960784314" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="onTipSelect:" destination="lCW-4g-ml0" eventType="valueChanged" id="sZN-O7-QcY"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dad-a7-N6a"/>
+                    <connections>
+                        <outlet property="tipSegment" destination="eEY-77-COW" id="qhQ-Go-0u5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NIp-nx-39e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1206" y="406"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RNL-rk-dBH">
